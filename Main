@@ -1,0 +1,27 @@
+print('Kalkulator Lokat v0.1')
+print('Przy wpisywaniu wartości niecałkowitych używaj kropek zamiast przecinków')
+print('Podaj wartość wkładu pieniężnego')
+K0 = input()
+print('Na jaki okres [podaj w latach]')
+n = input()
+print('Liczba okresów kapitalizacji w ciągu roku')
+m = input()
+print('Jaka jest roczna stopa procentowa [w w postaci dziesiętnej]')
+r = input()
+
+K0 = float(K0)
+n = float(n)
+m = float(m)
+r = float(r)
+
+Kbrutto = K0 * (1 + (r / m)) ** (n * m)
+Belka = 0.19
+Zysk = Kbrutto - K0
+ZyskN = Zysk * (1 - Belka)
+Podatek = Zysk - ZyskN
+Knetto = K0 + ZyskN
+
+print('Wartość na koniec lokaty ' + str(Knetto) + 'zł')
+print('Zysk z lokaty ' + str(ZyskN) + 'zł')
+print('Wysokość podatku Belki ' + str(Belka*100) + '%')
+print('Podatek ' + str(Podatek) + 'zł')
