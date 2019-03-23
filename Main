@@ -1,27 +1,64 @@
-print('Kalkulator Lokat v0.1')
-print('Przy wpisywaniu wartości niecałkowitych używaj kropek zamiast przecinków')
-print('Podaj wartość wkładu pieniężnego')
-K0 = input()
-print('Na jaki okres [podaj w latach]')
-n = input()
-print('Liczba okresów kapitalizacji w ciągu roku')
-m = input()
-print('Jaka jest roczna stopa procentowa [w w postaci dziesiętnej]')
-r = input()
+def Menu():
+    print('Kalkulator Lokat v0.1')
+    print('Przy wpisywaniu wartości niecałkowitych używaj kropek zamiast przecinków')
+    print()
+    print('Menu Główne')
+    print()
+    print('Kalkulator Lokat -> 1')
+    print('Oszczędzanie -> 2')
+    menu = input()
+    menu = int(menu)
 
-K0 = float(K0)
-n = float(n)
-m = float(m)
-r = float(r)
+    if menu == 1:
+        KalkulatorLokat()
+        return Menu()
+    elif menu == 2:
+        Oszczedzanie()
+        return Menu()
+    else: 
+        koniec = input()
 
-Kbrutto = K0 * (1 + (r / m)) ** (n * m)
-Belka = 0.19
-Zysk = Kbrutto - K0
-ZyskN = Zysk * (1 - Belka)
-Podatek = Zysk - ZyskN
-Knetto = K0 + ZyskN
+def KalkulatorLokat():
+    print('Podaj wartość wkładu pieniężnego')
+    K0 = input()
+    print('Na jaki okres [podaj w latach]')
+    n = input()
+    print('Liczba okresów kapitalizacji w ciągu roku')
+    m = input()
+    print('Jaka jest roczna stopa procentowa [podaj w postaci dziesiętnej]')
+    r = input()
 
-print('Wartość na koniec lokaty ' + str(Knetto) + 'zł')
-print('Zysk z lokaty ' + str(ZyskN) + 'zł')
-print('Wysokość podatku Belki ' + str(Belka*100) + '%')
-print('Podatek ' + str(Podatek) + 'zł')
+    K0 = float(K0)
+    n = float(n)
+    m = float(m)
+    r = float(r)
+
+    Kbrutto = K0 * (1 + (r / m)) ** (n * m)
+    Belka = 0.19
+    Zysk = Kbrutto - K0
+    ZyskN = Zysk * (1 - Belka)
+    Podatek = Zysk - ZyskN
+    Knetto = K0 + ZyskN
+
+    print('Wartość na koniec lokaty ' + str(Knetto) + 'zł')
+    print('Zysk z lokaty ' + str(ZyskN) + 'zł')
+    print('Wysokość podatku Belki ' + str(Belka*100) + '%')
+    print('Podatek ' + str(Podatek) + 'zł')
+    print()
+    koniec = input()
+    return
+
+def Oszczedzanie():
+    print('Podaj kwotę oszczędzaną co miesiąc')
+    kwota_oszczednosci=input()
+    print('Podaj ile miesięcy chcesz oszczędzać')
+    ilosc_miesiecy=input()
+
+    kwota_oszczednosci=float(kwota_oszczednosci)
+    ilosc_miesiecy=int(ilosc_miesiecy)
+    zaoszczedzone=kwota_oszczednosci*ilosc_miesiecy
+    print('Po ' + str(ilosc_miesiecy) + ' miesiącach zaoszczędzisz ' + str(zaoszczedzone) + ' złotych')
+    koniec=input()
+    
+Menu()
+
