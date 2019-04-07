@@ -1,6 +1,6 @@
 def Menu():
     
-    print('Kalkulator Lokat v0.1')
+    print('Kalkulator Finansowy v0.2')
     print('Przy wpisywaniu wartości niecałkowitych używaj kropek zamiast przecinków')
     print()
     print('Menu Główne')
@@ -8,6 +8,7 @@ def Menu():
     print('Kalkulator Lokat Pekao -> 1')
     print('Standardowy Kalkulator Lokat -> 2')
     print('Oszczędzanie -> 3')
+    print('Inwestowanie w obligacje -> 4')
     menu = input()
     menu = int(menu)
 
@@ -19,6 +20,9 @@ def Menu():
         return Menu()
     elif menu == 3:
         Oszczedzanie()
+        return Menu()
+    elif menu == 4:
+        Obligacje()
         return Menu()
     else: 
         koniec = input()
@@ -91,6 +95,60 @@ def KalkulatorLokat():
     koniec = input()
     return
 
+def Obligacje():
+
+    ListaObligacji = ['3msc, 1,5% -> 1','2lata, 2,1% -> 2','4lata, 2,2% -> 3','6lat, 2,4% -> 4','10lat, 2,8% ->5','12lat, 3,2% -> 6']
+    Czas = [0.25,2,4,6,10,12]
+    Oprocentowanie = [1.5,2.1,2.2,2.4,2.7,2.8,3.2]
+
+    print('Lista dostępnych obligacji:')
+    for i in ListaObligacji:
+        print(i)
+    print()
+    print('Wybierz obligacje')
+    wybor = input()
+    wybor = int(wybor) - 1
+    if wybor > 5:
+        print('Wybierz ponownie')
+        Obligacje()
+    else:
+        print('Podaj wartość wkładu pieniężnego')
+        K0 = input()
+        K0 = float(K0)
+        if K0 < 100:
+            print('Minimalny wkład pieniężny to 100zł')
+            print()
+            Obligacje()
+        else:    
+            ilosc = K0 // 100
+            
+        n = Czas[wybor]
+        r = Oprocentowanie[wybor]
+        Belka = 0.19
+
+        odsetki_brutto = ilosc * r * n
+        odsetki_netto = odsetki_brutto * (1 - Belka)
+        
+
+        Podatek = odsetki_brutto - odsetki_netto
+        Knetto = K0 + odsetki_netto
+
+        if wybor == 1:     
+            print('Zysk całkowity ' + str("%.2f" % odsetki_netto) + 'zł')
+            print('Łączny kapitał przy wykupie obligacji ' + str("%.2f" % Knetto) + 'zł')
+            print('Wysokość podatku Belki ' + str("%.2f" % (Belka*100)) + '%')
+            print('Podatek ' + str("%.2f" % Podatek) + 'zł')
+        else:
+            print('Zysk roczny ' + str("%.2f" % (ilosc*r*(1-Belka))) + 'zł')
+            print('Zysk całkowity ' + str("%.2f" % odsetki_netto) + 'zł')
+            print('Łączny kapitał przy wykupie obligacji ' + str("%.2f" % Knetto) + 'zł')
+            print('Wysokość podatku Belki ' + str("%.2f" % (Belka*100)) + '%')
+            print('Podatek ' + str("%.2f" % Podatek) + 'zł')
+
+        end = input()
+        return
+
+
 def Oszczedzanie():
     print('Podaj kwotę oszczędzaną co miesiąc')
     kwota_oszczednosci=input()
@@ -104,6 +162,5 @@ def Oszczedzanie():
     koniec=input()
     
 Menu()
-
 
 
